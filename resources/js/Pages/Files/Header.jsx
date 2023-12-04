@@ -14,7 +14,6 @@ const Header = ({ selectedFile, setSelectedFile, message, setMessage, setFiles }
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
-        alert(7)
     };
 
     useEffect(() => {
@@ -32,23 +31,20 @@ const Header = ({ selectedFile, setSelectedFile, message, setMessage, setFiles }
                 method: 'POST',
                 body: formData,
             })
-                .then(response => {
-                    if (!response.ok) {
-                        return response.json();
-                    }
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
                     if (!data.errors) {
                         setFiles(data.files);
                         setFile(null);
                         setMessage("File uploaded successfully");
+                        // Reset file input
+                        fileInputRef.current.value = null;
                     } else {
-                        setMessage(data.errors.file);
+                        setMessage(data.errors.file || 'Unknown error occurred during file upload.');
                     }
                 })
                 .catch(error => {
-                    console.log(error);
+                    console.error('Error during file upload:', error);
                     setMessage('An error occurred while processing the request. Please try again.');
                 });
         } else {
@@ -78,7 +74,7 @@ const Header = ({ selectedFile, setSelectedFile, message, setMessage, setFiles }
 
     return (
         <header style={{ maxWidth: '545px', height: '38px', margin: '0 auto', padding: '20px', paddingBottom: '0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-            <div style={{ position: 'absolute', top: '20px', left: '40px', background: 'white', padding: '10px', zIndex: '10' }} className="messages">
+            <div style={{ position: 'absolute', top: '20px', left: '40px', background: 'white', padding: '10px', zIndex: '10', borderRadius: '6px', boxShadow: '1px 1px 5px 0px rgba(0,0,0,0.75)' }} className="messages">
                 {message && <p style={{ color: 'red' }}>{message}</p>}
             </div>
             <div style={{ width: '38px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
