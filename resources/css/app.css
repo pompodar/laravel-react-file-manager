@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    font-size: 14px;
+    font-family: Roboto;
+    box-sizing: border-box;
+}
+
+.card.active .card-top-buttons,
+.card.active .card-download-button {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
