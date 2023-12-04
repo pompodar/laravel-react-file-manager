@@ -74,9 +74,11 @@ const Header = ({ selectedFile, setSelectedFile, message, setMessage, setFiles }
 
     return (
         <header style={{ maxWidth: '545px', height: '38px', margin: '0 auto', padding: '20px', paddingBottom: '0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
+            {message && 
             <div style={{ position: 'absolute', top: '20px', left: '40px', background: 'white', padding: '10px', zIndex: '10', borderRadius: '6px', boxShadow: '1px 1px 5px 0px rgba(0,0,0,0.75)' }} className="messages">
-                {message && <p style={{ color: 'red' }}>{message}</p>}
+                <p style={{ color: 'red' }}>{message}</p>
             </div>
+            }
             <div style={{ width: '38px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Checkbox />
             </div>
